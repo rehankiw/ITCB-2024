@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart Pengembangan Aplikasi Mobile Mahasiswa</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.17.1/flowchart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #canvas {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas"></div>
+
+    <script>
+        var diagram = flowchart.parse(`
+        st=>start: Mulai Proyek
+        e=>end: Selesai Proyek
+
+        io1=>inputoutput: Riset pasar dan identifikasi masalah
+        op1=>operation: Brainstorming ide aplikasi
+        cond1=>condition: Ide disetujui dosen?
+        op2=>operation: Perbaiki ide
+        io2=>inputoutput: Buat proposal proyek
+        op3=>operation: Desain UI/UX aplikasi
+        io3=>inputoutput: Belajar bahasa pemrograman mobile
+        op4=>operation: Pengembangan prototipe aplikasi
+        cond2=>condition: Prototipe berfungsi?
+        op5=>operation: Debug dan perbaiki
+        io4=>inputoutput: Uji pengguna dan kumpulkan feedback
+        op6=>operation: Implementasi feedback
+        io5=>inputoutput: Presentasi proyek ke dosen
+        cond3=>condition: Proyek diterima?
+        op7=>operation: Revisi berdasarkan masukan dosen
+        op8=>operation: Persiapkan aplikasi untuk peluncuran
+        io6=>inputoutput: Buat materi pemasaran
+        op9=>operation: Luncurkan aplikasi di app store
+        io7=>inputoutput: Analisis metrik awal dan feedback pengguna
+
+        st->io1->op1->cond1
+        cond1(yes)->io2
+        cond1(no)->op2(right)->op1
+        io2->op3->io3->op4->cond2
+        cond2(yes)->io4
+        cond2(no)->op5(right)->op4
+        io4->op6->io5->cond3
+        cond3(yes)->op8
+        cond3(no)->op7(right)->io5
+        op8->io6->op9->io7->e
+        `);
+
+        diagram.drawSVG('canvas');
+    </script>
+</body>
+</html>
